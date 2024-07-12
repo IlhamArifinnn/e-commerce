@@ -28,17 +28,40 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // User-specific routes
-    Route::resource('testimonis', TestimoniController::class)->only(['create', 'edit', 'update', 'destroy']);   
-    
-});
+    Route::get('testimonis/index', [TestimoniController::class, 'index'])->name('testimonis.index');
+    Route::get('testimonis/create', [TestimoniController::class, 'create'])->name('testimonis.create');
+    Route::post('testimonis', [TestimoniController::class, 'store'])->name('testimonis.store');
+    Route::get('testimonis/{testimoni}/edit', [TestimoniController::class, 'edit'])->name('testimonis.edit');
+    Route::put('testimonis/{testimoni}', [TestimoniController::class, 'update'])->name('testimonis.update');
+    Route::delete('testimonis/{testimoni}', [TestimoniController::class, 'destroy'])->name('testimonis.destroy');
 
+
+    // Route::get('/testimonis/create', [TestimoniController::class, 'create'])->name('testimonis.create');
+    // Route::get('/testimonis', [TestimoniController::class, 'index'])->name('testimonis.index');
+    // Route::post('/testimonis', [TestimoniController::class, 'store'])->name('testimonis.store');
+    // Route::get('/testimonis/{testimoni}', [TestimoniController::class, 'show'])->name('testimonis.show');
+    // Route::get('/testimonis/{testimoni}/edit', [TestimoniController::class, 'edit'])->name('testimonis.edit');
+    // Route::put('/testimonis/{testimoni}', [TestimoniController::class, 'update'])->name('testimonis.update');
+    // Route::delete('/testimonis/{testimoni}', [TestimoniController::class, 'destroy'])->name('testimonis.destroy');
+
+
+
+    Route::get('/profil', function () {;
+        return view('profile.profile');
+    });
+});
 // Admin-specific routes with 'admin' middleware
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::resource('jenis_produks', JenisProdukController::class);
     Route::resource('kategori_tokohs', KategoriTokohController::class);
     Route::resource('produks', ProdukController::class);
-    Route::resource('testimonis', TestimoniController::class)->except(['create', 'edit', 'update', 'destroy']);
+    Route::get('testimonis/create', [TestimoniController::class, 'create'])->name('testimonis.create');
+    Route::post('testimonis', [TestimoniController::class, 'store'])->name('testimonis.store');
+    Route::get('testimonis/{testimoni}/edit', [TestimoniController::class, 'edit'])->name('testimonis.edit');
+    Route::put('testimonis/{testimoni}', [TestimoniController::class, 'update'])->name('testimonis.update');
+    Route::delete('testimonis/{testimoni}', [TestimoniController::class, 'destroy'])->name('testimonis.destroy');
 });
+
 
 // Additional routes
 require __DIR__ . '/auth.php';

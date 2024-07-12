@@ -6,6 +6,7 @@ use App\Models\KategoriTokoh;
 use App\Models\Produk;
 use App\Models\Testimoni;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TestimoniController extends Controller
 {
@@ -63,7 +64,19 @@ class TestimoniController extends Controller
     {
         $produks = Produk::all();
         $kategoriTokohs = KategoriTokoh::all();
-        return view('testimonis.edit', compact('testimoni', 'produks', 'kategoriTokohs'));
+
+        // Check if the authenticated user is admin
+        if (Auth::user()->role == 'admin') {
+            return view('testimonis.edit', compact('testimoni', 'produks', 'kategoriTokohs'));
+        }
+
+        // If user is not admin, check if they are the author of the testimonial
+        if ($testimoni->user_id == Auth::id()) {
+            return view('testimonis.edit', compact('testimoni', 'produks', 'kategoriTokohs'));
+        }
+
+        // If neither admin nor testimonial author, return unauthorized view or redirect
+        abort(403, 'Unauthorized action.');
     }
 
     /**
@@ -80,10 +93,22 @@ class TestimoniController extends Controller
             'kategori_tokoh_id' => 'required|exists:kategori_tokohs,id',
         ]);
 
-        $testimoni->update($request->all());
+        // Check if the authenticated user is admin
+        if (Auth::user()->role == 'admin') {
+            $testimoni->update($request->all());
+            return redirect()->route('testimonis.index')
+                ->with('success', 'Testimoni updated successfully.');
+        }
 
-        return redirect()->route('testimonis.index')
-            ->with('success', 'Testimoni updated successfully.');
+        // If user is not admin, check if they are the author of the testimonial
+        if ($testimoni->user_id == Auth::id()) {
+            $testimoni->update($request->all());
+            return redirect()->route('testimonis.index')
+                ->with('success', 'Testimoni updated successfully.');
+        }
+
+        // If neither admin nor testimonial author, return unauthorized view or redirect
+        abort(403, 'Unauthorized action.');
     }
 
     /**
@@ -91,9 +116,21 @@ class TestimoniController extends Controller
      */
     public function destroy(Testimoni $testimoni)
     {
-        $testimoni->delete();
+        // Check if the authenticated user is admin
+        if (Auth::user()->role == 'admin') {
+            $testimoni->delete();
+            return redirect()->route('testimonis.index')
+                ->with('success', 'Testimoni deleted successfully.');
+        }
 
-        return redirect()->route('testimonis.index')
-            ->with('success', 'Testimoni deleted successfully.');
+        // If user is not admin, check if they are the author of the testimonial
+        if ($testimoni->user_id == Auth::id()) {
+            $testimoni->delete();
+            return redirect()->route('testimonis.index')
+                ->with('success', 'Testimoni deleted successfully.');
+        }
+
+        // If neither admin nor testimonial author, return unauthorized view or redirect
+        abort(403, 'Unauthorized action.');
     }
 }

@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('profile.edit') }}" class="nav-link">
+                    <a href="/profil" class="nav-link">
                         <i class="nav-icon fas fa-user-alt"></i>
                         <p>Profile</p>
                     </a>
@@ -62,7 +62,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <!-- Conditional menu for Admin -->
-                        @if(auth()->check() && auth()->user()->Admin())
+                        @if (auth()->check() && auth()->user()->Admin())
                             <li class="nav-item">
                                 <a href="{{ route('jenis_produks.index') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -84,7 +84,7 @@
                         @endif
                         <!-- Menu for User -->
                         <li class="nav-item">
-                            <a href="{{ route('testimonis.index') }}" class="nav-link">
+                            <a href="/testimonis" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Table Testimoni</p>
                             </a>
