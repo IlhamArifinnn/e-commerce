@@ -47,7 +47,7 @@
                        </a>
                    </li>
                    <li class="nav-item">
-                       <a href="" class="nav-link">
+                       <a href="/profile" class="nav-link">
                            <i class="nav-icon fas fa-user-alt"></i>
                            <p>
                                Profile

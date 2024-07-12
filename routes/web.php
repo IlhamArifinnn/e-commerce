@@ -32,6 +32,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('kategori_tokohs', KategoriTokohController::class);
     Route::resource('produks', ProdukController::class);
     Route::resource('testimonis', TestimoniController::class);
+
+    Route::get('/profile', function () {
+        return view('profile.profile');
+    });
 });
 
 

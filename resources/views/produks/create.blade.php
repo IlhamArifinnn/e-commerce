@@ -50,7 +50,7 @@
                                         <div class="form-group">
                                             <label for="stok">Stok</label>
                                             <input type="number" class="form-control" id="stok" name="stok"
-                                                required>
+                                                max="5" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="rating">Rating</label>
