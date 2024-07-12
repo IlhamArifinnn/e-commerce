@@ -60,7 +60,7 @@
                         <label for="email_subscribe" class="footer-heading">Langganan</label>
                         <div class="form-group">
                             <input type="text" class="form-control py-4" id="email_subscribe" placeholder="Email" />
-                            <input type="submit" class="btn btn-sm btn-primary" value="Kirim" />
+                            <input type="button" class="btn btn-sm btn-primary" value="Kirim" />
                         </div>
                     </form>
                 </div>

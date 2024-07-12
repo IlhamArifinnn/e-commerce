@@ -27,7 +27,7 @@
                                 dan gaya. Temukan pilihan terbaik untuk berbagai aktivitas dan acara.
                             </p>
                             <p>
-                                <a href="#!" class="btn btn-sm btn-primary">Belanja Sekarang</a>
+                                <a href="/cart" class="btn btn-sm btn-primary">Belanja Sekarang</a>
                             </p>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
-                        <a class="block-2-item" href="#">
+                        <a class="block-2-item" href="#!">
                             <figure class="image">
                                 <img src="{{ asset('assets/landing-page/images/women.jpg') }}" alt=""
                                     class="img-fluid" />
@@ -96,7 +96,7 @@
                         </a>
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
-                        <a class="block-2-item" href="#">
+                        <a class="block-2-item" href="#!">
                             <figure class="image">
                                 <img src="{{ asset('assets/landing-page/images/children.jpg') }}" alt=""
                                     class="img-fluid" />
@@ -108,7 +108,7 @@
                         </a>
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
-                        <a class="block-2-item" href="#">
+                        <a class="block-2-item" href="#!">
                             <figure class="image">
                                 <img src="{{ asset('assets/landing-page/images/men.jpg') }}" alt=""
                                     class="img-fluid" />
@@ -229,7 +229,7 @@
                             Nikmati diskon besar untuk semua produk di toko kami. Jangan lewatkan kesempatan emas ini
                             untuk mendapatkan barang berkualitas dengan harga terbaik.
                         </p>
-                        <p><a href="#" class="btn btn-primary btn-sm">Belanja Sekarang</a></p>
+                        <p><a href="/cart" class="btn btn-primary btn-sm">Belanja Sekarang</a></p>
                     </div>
                 </div>
             </div>
