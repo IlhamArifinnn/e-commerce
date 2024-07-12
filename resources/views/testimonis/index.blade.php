@@ -50,20 +50,20 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>No</th>
                                                 <th>Tanggal</th>
                                                 <th>Nama Tokoh</th>
                                                 <th>Komentar</th>
                                                 <th>Rating</th>
                                                 <th>Produk</th>
-                                                <th>Kategori Tokoh</th>
+                                                <th>Kategori </th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($testimonis as $testimoni)
                                                 <tr>
-                                                    <td>{{ $testimoni->id }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $testimoni->tanggal }}</td>
                                                     <td>{{ $testimoni->nama_tokoh }}</td>
                                                     <td>{{ $testimoni->komentar }}</td>
@@ -72,15 +72,17 @@
                                                     <td>{{ $testimoni->kategoriTokoh->nama }}</td>
                                                     <td>
                                                         <a href="{{ route('testimonis.show', $testimoni) }}"
-                                                            class="btn btn-info">Lihat</a>
+                                                            class="btn btn-info"><i class="bi bi-eye"></i></a>
                                                         <a href="{{ route('testimonis.edit', $testimoni) }}"
-                                                            class="btn btn-warning">Edit</a>
+                                                            class="btn btn-warning"><i
+                                                                class="bi bi-pencil-square"></i></a>
                                                         <form action="{{ route('testimonis.destroy', $testimoni) }}"
                                                             method="POST" style="display:inline;"
                                                             onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                            <button type="submit" class="btn btn-danger"><i
+                                                                    class="bi bi-trash3"></i></button>
                                                         </form>
                                                     </td>
                                                 </tr>

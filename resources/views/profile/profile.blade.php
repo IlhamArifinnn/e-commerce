@@ -26,7 +26,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Dashboard E-Commerce</h1>
+                            <h1>Profil </h1>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -41,36 +41,56 @@
                             <!-- Default box -->
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Profil</h3>
+                                    <h3 class="card-title">Profile </h3>
                                 </div>
                                 <div class="card-body">
-                                    <table class="table table-striped">
-                                        @auth
-                                            <tr>
-                                                <th>Nama</th>
-                                                <td>{{ Auth::user()->name }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Email</th>
-                                                <td>{{ Auth::user()->email }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Role</th>
-                                                <td>{{ Auth::user()->role }}</td>
-                                            </tr>
-                                        @endauth
-                                        @guest
-                                            <tr>
-                                                <td colspan="3">Anda belum masuk.</td>
-                                            </tr>
-                                        @endguest
-                                    </table>
+                                    <div class="container">
+                                        <h4 class="text-center mt-4">Selamat Datang Di Website Sederhana
+                                            E-Commerce<br />Projek
+                                            UAS
+                                            Web
+                                            2 - Kelompok</h4>
+                                        <div class="row justify-content-center mt-5">
+                                            <div class="col-md-5">
+                                                <div class="card">
+                                                    <h5 class="card-title text-center mt-3">Informasi Pengguna</h5>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                @auth
+                                                                    <ul class="list-group list-group-flush">
+                                                                        <li class="list-group-item"><strong>Nama :</strong>
+                                                                            {{ Auth::user()->name }}</li>
+                                                                        <li class="list-group-item"><strong>Email :</strong>
+                                                                            {{ Auth::user()->email }}</li>
+                                                                        <li class="list-group-item"><strong>Role
+                                                                                :</strong> {{ Auth::user()->role }}</li>
+                                                                    </ul>
+                                                                @endauth
+                                                                @guest
+                                                                    <li>
+                                                                        <strong colspan="3">Anda belum masuk.</strong>
+                                                                    </li>
+                                                                @endguest
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer">
+                                    Projek UAS - Aplikasi Web Sederhana E-Commerce
+                                </div>
+                                <!-- /.card-footer-->
                             </div>
                             <!-- /.card -->
                         </div>
                     </div>
                 </div>
+
             </section>
             <!-- /.content -->
         </div>

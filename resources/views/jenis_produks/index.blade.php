@@ -50,7 +50,7 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>No</th>
                                                 <th>Nama</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -58,20 +58,20 @@
                                         <tbody>
                                             @foreach ($jenisProduks as $jenisProduk)
                                                 <tr>
-                                                    <td>{{ $jenisProduk->id }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $jenisProduk->nama }}</td>
                                                     <td>
                                                         <a href="{{ route('jenis_produks.show', $jenisProduk) }}"
-                                                            class="btn btn-info">Lihat</a>
+                                                            class="btn btn-info"><i class="bi bi-eye"></i></a>
                                                         <a href="{{ route('jenis_produks.edit', $jenisProduk) }}"
-                                                            class="btn btn-warning">Edit</a>
+                                                            class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
                                                         <form
                                                             action="{{ route('jenis_produks.destroy', $jenisProduk) }}"
                                                             method="POST" style="display:inline;"
                                                             onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                            <button type="submit" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
                                                         </form>
                                                     </td>
                                                 </tr>

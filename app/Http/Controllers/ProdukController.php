@@ -33,32 +33,24 @@ class ProdukController extends Controller
     {
         // Validasi data yang diterima
         $request->validate([
-            'kode' => 'required|string|max:255',
-            'nama' => 'required|string|max:255',
+            'kode' => 'required|string|max:10',
+            'nama' => 'required|string|max:45',
             'harga' => 'required|numeric',
             'stok' => 'required|integer',
-            'minimal' => 'required|integer',
             'rating' => 'required|integer|min:1|max:5',
-            'jenis_produk_id' => 'required|integer|exists:jenis_produks,id',
-            'deskripsi' => 'nullable|string',
+            'minimal' => 'required|integer',
+            'jenis_produk_id' => 'required|exists:jenis_produks,id',
+            'deskripsi' => 'required|string',
         ]);
 
-        // Buat instance baru dari model Produk
-        $produk = new Produk();
-        $produk->kode = $request->kode;
-        $produk->nama = $request->nama;
-        $produk->harga = $request->harga;
-        $produk->stok = $request->stok;
-        $produk->minimal = $request->minimal;
-        $produk->rating = $request->rating;
-        $produk->jenis_produk_id = $request->jenis_produk_id;
-        $produk->deskripsi = $request->deskripsi;
 
-        // Simpan produk ke dalam database
-        $produk->save();
 
-        // Redirect ke halaman produk dengan pesan sukses
-        return redirect()->route('produks.index')->with('success', 'Produk berhasil ditambahkan!');
+        // Create the Produk instance with the validated data
+        Produk::create($request->all());
+
+        // Redirect back to the Produk index with a success message
+        return redirect()->route('produks.index')
+            ->with('success', 'Produk created successfully.');
     }
 
     /**
@@ -90,7 +82,7 @@ class ProdukController extends Controller
             'harga' => 'required|numeric',
             'stok' => 'required|integer',
             'rating' => 'required|integer|min:1|max:5', // Ensure rating is between 1 and 5
-            'min_stok' => 'required|integer',
+            'minimal' => 'required|integer',
             'jenis_produk_id' => 'required|exists:jenis_produks,id',
             'deskripsi' => 'required|string',
         ]);

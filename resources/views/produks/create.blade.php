@@ -30,54 +30,67 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="{{ route('produks.store') }}" method="POST">
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+
+                                    <form action="{{ route('produks.update', $produk->id) }}" method="POST">
                                         @csrf
+                                        @method('PUT')
                                         <div class="form-group">
                                             <label for="kode">Kode</label>
                                             <input type="text" class="form-control" id="kode" name="kode"
-                                                required>
+                                                value="{{ old('kode', $produk->kode) }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="nama">Nama</label>
                                             <input type="text" class="form-control" id="nama" name="nama"
-                                                required>
+                                                value="{{ old('nama', $produk->nama) }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="harga">Harga</label>
                                             <input type="number" class="form-control" id="harga" name="harga"
-                                                required>
+                                                value="{{ old('harga', $produk->harga) }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="stok">Stok</label>
                                             <input type="number" class="form-control" id="stok" name="stok"
-                                                max="5" required>
+                                                value="{{ old('stok', $produk->stok) }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="rating">Rating</label>
                                             <input type="number" class="form-control" id="rating" name="rating"
-                                                required>
+                                                value="{{ old('rating', $produk->rating) }}" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="minimal">Min Stok</label>
-                                            <input type="number" class="form-control" id="minimal" name="minimal" required>
+                                            <label for="minimal">Minimal Stok</label>
+                                            <input type="number" class="form-control" id="minimal" name="minimal"
+                                                value="{{ old('minimal', $produk->minimal) }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="jenis_produk_id">Jenis Produk</label>
                                             <select class="form-control" id="jenis_produk_id" name="jenis_produk_id"
                                                 required>
                                                 @foreach ($jenisProduks as $jenisProduk)
-                                                    <option value="{{ $jenisProduk->id }}">{{ $jenisProduk->nama }}
+                                                    <option value="{{ $jenisProduk->id }}"
+                                                        {{ $produk->jenis_produk_id == $jenisProduk->id ? 'selected' : '' }}>
+                                                        {{ $jenisProduk->nama }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="deskripsi">Deskripsi</label>
-                                            <textarea class="form-control" id="deskripsi" name="deskripsi" required></textarea>
+                                            <textarea class="form-control" id="deskripsi" name="deskripsi" required>{{ old('deskripsi', $produk->deskripsi) }}</textarea>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                     </form>
-
                                 </div>
                                 <div class="card-footer">
                                     Projek UAS - Aplikasi Web E-Commerce

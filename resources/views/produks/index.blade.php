@@ -40,33 +40,35 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>No</th>
                                                 <th>Kode</th>
                                                 <th>Nama</th>
                                                 <th>Harga</th>
                                                 <th>Stok</th>
+                                                <th>Rating</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($produks as $produk)
                                                 <tr>
-                                                    <td>{{ $produk->id }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $produk->kode }}</td>
                                                     <td>{{ $produk->nama }}</td>
                                                     <td>{{ $produk->harga }}</td>
                                                     <td>{{ $produk->stok }}</td>
+                                                    <td>{{ $produk->rating }}</td>
                                                     <td>
                                                         <a href="{{ route('produks.show', $produk) }}"
-                                                            class="btn btn-info">Lihat</a>
+                                                            class="btn btn-info"><i class="bi bi-eye"></i></a>
                                                         <a href="{{ route('produks.edit', $produk) }}"
-                                                            class="btn btn-warning">Edit</a>
+                                                            class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
                                                         <form action="{{ route('produks.destroy', $produk) }}"
                                                             method="POST" style="display:inline;"
                                                             onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                            <button type="submit" class="btn btn-danger"><i class="bi bi-trash3"></i></button>
                                                         </form>
                                                     </td>
                                                 </tr>
