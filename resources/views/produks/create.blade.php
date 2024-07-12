@@ -58,9 +58,8 @@
                                                 required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="min_stok">Min Stok</label>
-                                            <input type="number" class="form-control" id="min_stok" name="min_stok"
-                                                required>
+                                            <label for="minimal">Min Stok</label>
+                                            <input type="number" class="form-control" id="minimal" name="minimal" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="jenis_produk_id">Jenis Produk</label>

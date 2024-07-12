@@ -18,7 +18,7 @@ return new class extends Migration
             $table->double('harga');
             $table->integer('stok');
             $table->integer('rating');
-            $table->integer('min_stok');
+            $table->integer('minimal');
             $table->foreignId('jenis_produk_id')->constrained('jenis_produks');
             $table->text('deskripsi');
             $table->timestamps();

@@ -45,20 +45,25 @@
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-striped">
-
-                                        <tr>
-                                            <th>Nama</th>
-                                            <td>apalah</td>
-                                        </tr>
-                                        <tr>
-                                            <th>email</th>
-                                            <td>vafa</td>
-                                        </tr>
-                                        <tr>
-                                            <th>role</th>
-                                            <td>abab</td>
-                                        </tr>
-
+                                        @auth
+                                            <tr>
+                                                <th>Nama</th>
+                                                <td>{{ Auth::user()->name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Email</th>
+                                                <td>{{ Auth::user()->email }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Role</th>
+                                                <td>{{ Auth::user()->role }}</td>
+                                            </tr>
+                                        @endauth
+                                        @guest
+                                            <tr>
+                                                <td colspan="3">Anda belum masuk.</td>
+                                            </tr>
+                                        @endguest
                                     </table>
                                 </div>
                             </div>

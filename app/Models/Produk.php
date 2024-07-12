@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +10,7 @@ class Produk extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['kode', 'nama', 'harga', 'stok', 'rating', 'min_stok', 'jenis_produk_id', 'deskripsi'];
+    protected $fillable = ['kode', 'nama', 'harga', 'stok', 'rating', 'minimal', 'jenis_produk_id', 'deskripsi'];
 
     public function jenisProduk()
     {
