@@ -6,8 +6,14 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function index()
+    public function dashboard()
     {
-        return view("admin.index");
+        return view('admin.dashboard');
+    }
+
+    public function userManagement()
+    {
+        $users = \App\Models\User::all();
+        return view('admin.index', compact('users'));
     }
 }
