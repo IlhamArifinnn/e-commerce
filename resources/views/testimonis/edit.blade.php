@@ -43,7 +43,7 @@
                                     <h3 class="card-title">Form Edit Testimoni</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form action="{{ route('testimonis.update', $testimoni) }}" method="POST">
+                                <form action="{{ Gate::allows('Admin') ? route('admin.testimonis.update', $testimoni->id) : route('user.testimonis.update', $testimoni->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <div class="form-group">

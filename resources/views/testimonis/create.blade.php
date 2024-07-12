@@ -43,7 +43,7 @@
                                     <h3 class="card-title">Form Tambah Testimoni</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form action="{{ route('testimonis.store') }}" method="POST">
+                                <form action="{{ Gate::allows('Admin') ? route('admin.testimonis.store') : route('user.testimonis.store') }}" method="POST">
                                         @csrf
                                         <div class="form-group">
                                             <label for="tanggal">Tanggal</label>

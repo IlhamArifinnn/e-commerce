@@ -7,6 +7,7 @@ use App\Models\Produk;
 use App\Models\Testimoni;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class TestimoniController extends Controller
 {
@@ -43,18 +44,18 @@ class TestimoniController extends Controller
             'kategori_tokoh_id' => 'required|exists:kategori_tokohs,id',
         ]);
 
-        Testimoni::create($request->all());
+        if (Gate::allows('Admin')) {
+            // Jika pengguna adalah admin, mereka bisa membuat testimoni tanpa validasi user_id
+            Testimoni::create($request->all());
+        } else {
+            // Jika bukan admin, set user_id sesuai dengan pengguna yang sedang login
+            $validatedData = $request->validated();
+            $validatedData['user_id'] = Auth::id();
+            Testimoni::create($validatedData);
+        }
 
         return redirect()->route('testimonis.index')
             ->with('success', 'Testimoni created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Testimoni $testimoni)
-    {
-        return view('testimonis.show', compact('testimoni'));
     }
 
     /**
@@ -65,17 +66,10 @@ class TestimoniController extends Controller
         $produks = Produk::all();
         $kategoriTokohs = KategoriTokoh::all();
 
-        // Check if the authenticated user is admin
-        if (Auth::user()->role == 'admin') {
+        if (Gate::allows('Admin') || $testimoni->user_id == Auth::id()) {
             return view('testimonis.edit', compact('testimoni', 'produks', 'kategoriTokohs'));
         }
 
-        // If user is not admin, check if they are the author of the testimonial
-        if ($testimoni->user_id == Auth::id()) {
-            return view('testimonis.edit', compact('testimoni', 'produks', 'kategoriTokohs'));
-        }
-
-        // If neither admin nor testimonial author, return unauthorized view or redirect
         abort(403, 'Unauthorized action.');
     }
 
@@ -93,21 +87,12 @@ class TestimoniController extends Controller
             'kategori_tokoh_id' => 'required|exists:kategori_tokohs,id',
         ]);
 
-        // Check if the authenticated user is admin
-        if (Auth::user()->role == 'admin') {
+        if (Gate::allows('Admin') || $testimoni->user_id == Auth::id()) {
             $testimoni->update($request->all());
             return redirect()->route('testimonis.index')
                 ->with('success', 'Testimoni updated successfully.');
         }
 
-        // If user is not admin, check if they are the author of the testimonial
-        if ($testimoni->user_id == Auth::id()) {
-            $testimoni->update($request->all());
-            return redirect()->route('testimonis.index')
-                ->with('success', 'Testimoni updated successfully.');
-        }
-
-        // If neither admin nor testimonial author, return unauthorized view or redirect
         abort(403, 'Unauthorized action.');
     }
 
@@ -116,21 +101,20 @@ class TestimoniController extends Controller
      */
     public function destroy(Testimoni $testimoni)
     {
-        // Check if the authenticated user is admin
-        if (Auth::user()->role == 'admin') {
+        if (Gate::allows('Admin') || $testimoni->user_id == Auth::id()) {
             $testimoni->delete();
             return redirect()->route('testimonis.index')
                 ->with('success', 'Testimoni deleted successfully.');
         }
 
-        // If user is not admin, check if they are the author of the testimonial
-        if ($testimoni->user_id == Auth::id()) {
-            $testimoni->delete();
-            return redirect()->route('testimonis.index')
-                ->with('success', 'Testimoni deleted successfully.');
-        }
-
-        // If neither admin nor testimonial author, return unauthorized view or redirect
         abort(403, 'Unauthorized action.');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Testimoni $testimoni)
+    {
+        return view('testimonis.show', compact('testimoni'));
     }
 }

@@ -42,9 +42,7 @@
                                 <div class="card-header">
                                     <h3 class="card-title">Daftar Testimoni</h3>
                                     <div class="card-tools">
-                                        <a href="{{ route('testimonis.create') }}" class="btn btn-success">Tambah
-                                            Testimoni</a>
-                                    </div>
+                                    <a href="{{ Gate::allows('Admin') ? route('admin.testimonis.create') : route('user.testimonis.create') }}" class="btn btn-primary mb-3">Tambah Testimoni</a>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-bordered">
