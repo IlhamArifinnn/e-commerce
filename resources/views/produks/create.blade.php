@@ -40,44 +40,55 @@
                                         </div>
                                     @endif
 
-                                    <form action="{{ route('testimonis.store') }}" method="POST">
+                                    <form action="{{ route('produks.store') }}" method="POST">
                                         @csrf
-                                        <!-- Form fields -->
                                         <div class="form-group">
-                                            <label for="tanggal">Tanggal</label>
-                                            <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ old('tanggal') }}" required>
+                                            <label for="kode">Kode</label>
+                                            <input type="text" class="form-control" id="kode" name="kode"
+                                                value="{{ old('kode') }}" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="nama_tokoh">Nama Tokoh</label>
-                                            <input type="text" class="form-control" id="nama_tokoh" name="nama_tokoh" value="{{ old('nama_tokoh') }}" required>
+                                            <label for="nama">Nama</label>
+                                            <input type="text" class="form-control" id="nama" name="nama"
+                                                value="{{ old('nama') }}" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="komentar">Komentar</label>
-                                            <textarea class="form-control" id="komentar" name="komentar" rows="3" required>{{ old('komentar') }}</textarea>
+                                            <label for="harga">Harga</label>
+                                            <input type="number" class="form-control" id="harga" name="harga"
+                                                value="{{ old('harga') }}" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="stok">Stok</label>
+                                            <input type="number" class="form-control" id="stok" name="stok"
+                                                value="{{ old('stok') }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="rating">Rating</label>
-                                            <input type="number" class="form-control" id="rating" name="rating" min="1" max="5" value="{{ old('rating') }}" required>
+                                            <input type="number" class="form-control" id="rating" name="rating"
+                                                min="1" max="5" value="{{ old('rating') }}" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="produk_id">Produk</label>
-                                            <select class="form-control" id="produk_id" name="produk_id" required>
-                                                @foreach ($produks as $produk)
-                                                    <option value="{{ $produk->id }}">{{ $produk->nama }}</option>
+                                            <label for="minimal">Minimal Stok</label>
+                                            <input type="number" class="form-control" id="minimal" name="minimal"
+                                                value="{{ old('minimal') }}" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="jenis_produk_id">Jenis Produk</label>
+                                            <select class="form-control" id="jenis_produk_id" name="jenis_produk_id"
+                                                required>
+                                                @foreach ($jenisProduks as $jenisProduk)
+                                                    <option value="{{ $jenisProduk->id }}">
+                                                        {{ $jenisProduk->nama }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="kategori_tokoh_id">Kategori Tokoh</label>
-                                            <select class="form-control" id="kategori_tokoh_id" name="kategori_tokoh_id" required>
-                                                @foreach ($kategoriTokohs as $kategoriTokoh)
-                                                    <option value="{{ $kategoriTokoh->id }}">{{ $kategoriTokoh->nama }}</option>
-                                                @endforeach
-                                            </select>
+                                            <label for="deskripsi">Deskripsi</label>
+                                            <textarea class="form-control" id="deskripsi" name="deskripsi" required>{{ old('deskripsi') }}</textarea>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                     </form>
-
                                 </div>
                                 <div class="card-footer">
                                     Projek UAS - Aplikasi Web E-Commerce

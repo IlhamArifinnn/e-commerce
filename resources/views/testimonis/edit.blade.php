@@ -43,46 +43,46 @@
                                     <h3 class="card-title">Form Edit Testimoni</h3>
                                 </div>
                                 <div class="card-body">
-                                <form action="{{ Gate::allows('Admin') ? route('admin.testimonis.update', $testimoni->id) : route('user.testimonis.update', $testimoni->id) }}" method="POST">
+                                    <form action="{{ route('testimonis.update', $testimoni) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <div class="form-group">
                                             <label for="tanggal">Tanggal</label>
-                                            <input type="date" name="tanggal" class="form-control" id="tanggal"
+                                            <input type="date" class="form-control" id="tanggal" name="tanggal"
                                                 value="{{ $testimoni->tanggal }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="nama_tokoh">Nama Tokoh</label>
-                                            <input type="text" name="nama_tokoh" class="form-control" id="nama_tokoh"
+                                            <input type="text" class="form-control" id="nama_tokoh" name="nama_tokoh"
                                                 value="{{ $testimoni->nama_tokoh }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="komentar">Komentar</label>
-                                            <textarea name="komentar" class="form-control" id="komentar" required>{{ $testimoni->komentar }}</textarea>
+                                            <textarea class="form-control" id="komentar" name="komentar" required>{{ $testimoni->komentar }}</textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="rating">Rating</label>
-                                            <input type="number" name="rating" class="form-control" id="rating"
-                                                value="{{ $testimoni->rating }}" required>
+                                            <input type="number" class="form-control" id="rating" name="rating"
+                                                min="1" max="5" value="{{ $testimoni->rating }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="produk_id">Produk</label>
-                                            <select name="produk_id" class="form-control" id="produk_id" required>
+                                            <select class="form-control" id="produk_id" name="produk_id" required>
                                                 @foreach ($produks as $produk)
                                                     <option value="{{ $produk->id }}"
-                                                        {{ $produk->id == $testimoni->produk_id ? 'selected' : '' }}>
+                                                        {{ $testimoni->produk_id == $produk->id ? 'selected' : '' }}>
                                                         {{ $produk->nama }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="kategori_tokoh_id">Kategori Tokoh</label>
-                                            <select name="kategori_tokoh_id" class="form-control" id="kategori_tokoh_id"
+                                            <select class="form-control" id="kategori_tokoh_id" name="kategori_tokoh_id"
                                                 required>
-                                                @foreach ($kategoriTokohs as $kategoriTokoh)
-                                                    <option value="{{ $kategoriTokoh->id }}"
-                                                        {{ $kategoriTokoh->id == $testimoni->kategori_tokoh_id ? 'selected' : '' }}>
-                                                        {{ $kategoriTokoh->nama }}</option>
+                                                @foreach ($kategoriTokohs as $kategori)
+                                                    <option value="{{ $kategori->id }}"
+                                                        {{ $testimoni->kategori_tokoh_id == $kategori->id ? 'selected' : '' }}>
+                                                        {{ $kategori->nama }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

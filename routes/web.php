@@ -36,25 +36,32 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::resource('testimonis', TestimoniController::class);
+    // Route::get('/testimonis', [TestimoniController::class, 'index'])->name('testimonis.index');
+    // Route::get('/testimonis/create', [TestimoniController::class, 'create'])->name('testimonis.create');
+    // Route::post('/testimonis', [TestimoniController::class, 'store'])->name('testimonis.store');
+    // Route::get('/testimonis/{testimoni}', [TestimoniController::class, 'show'])->name('testimonis.show');
+    // Route::get('/testimonis/{testimoni}/edit', [TestimoniController::class, 'edit'])->name('testimonis.edit');
+    // Route::put('/testimonis/{testimoni}', [TestimoniController::class, 'update'])->name('testimonis.update');
+    // Route::delete('/testimonis/{testimoni}', [TestimoniController::class, 'destroy'])->name('testimonis.destroy');
 
-    Route::get('/testimonis', [TestimoniController::class, 'index'])->name('testimonis.index');
-    Route::get('/testimonis/create', [TestimoniController::class, 'create'])->name('testimonis.create');
-    Route::post('/testimonis', [TestimoniController::class, 'store'])->name('testimonis.store');
-    Route::get('/testimonis/{testimoni}', [TestimoniController::class, 'show'])->name('testimonis.show');
-    Route::get('/testimonis/{testimoni}/edit', [TestimoniController::class, 'edit'])->name('testimonis.edit');
-    Route::put('/testimonis/{testimoni}', [TestimoniController::class, 'update'])->name('testimonis.update');
-    Route::delete('/testimonis/{testimoni}', [TestimoniController::class, 'destroy'])->name('testimonis.destroy');
 
     Route::get('/profil', function () {;
         return view('profile.profile');
     });
 });
+
+// Route::middleware(['auth', 'verified'])->group(function () {
+//     Route::put('/testimonis/{testimoni}', [TestimoniController::class, 'update'])->name('testimonis.update');
+//     Route::delete('/testimonis/{testimoni}', [TestimoniController::class, 'destroy'])->name('testimonis.destroy');
+// });
+
+
 // Admin-specific routes with 'admin' middleware
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::resource('jenis_produks', JenisProdukController::class);
     Route::resource('kategori_tokohs', KategoriTokohController::class);
     Route::resource('produks', ProdukController::class);
-    
 });
 
 

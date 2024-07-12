@@ -44,15 +44,14 @@ class TestimoniController extends Controller
             'kategori_tokoh_id' => 'required|exists:kategori_tokohs,id',
         ]);
 
-        if (Gate::allows('Admin')) {
-            // Jika pengguna adalah admin, mereka bisa membuat testimoni tanpa validasi user_id
-            Testimoni::create($request->all());
-        } else {
-            // Jika bukan admin, set user_id sesuai dengan pengguna yang sedang login
-            $validatedData = $request->validated();
+        $validatedData = $request->all();
+
+        if (!Gate::allows('Admin')) {
+            // Set user_id sesuai dengan pengguna yang sedang login jika bukan admin
             $validatedData['user_id'] = Auth::id();
-            Testimoni::create($validatedData);
         }
+
+        Testimoni::create($validatedData);
 
         return redirect()->route('testimonis.index')
             ->with('success', 'Testimoni created successfully.');
@@ -66,12 +65,11 @@ class TestimoniController extends Controller
         $produks = Produk::all();
         $kategoriTokohs = KategoriTokoh::all();
 
-        if (Gate::allows('Admin') || $testimoni->user_id == Auth::id()) {
-            return view('testimonis.edit', compact('testimoni', 'produks', 'kategoriTokohs'));
-        }
-
-        abort(403, 'Unauthorized action.');
+        return view('testimonis.edit', compact('testimoni', 'produks', 'kategoriTokohs'));
     }
+
+
+
 
     /**
      * Update the specified resource in storage.
@@ -87,28 +85,22 @@ class TestimoniController extends Controller
             'kategori_tokoh_id' => 'required|exists:kategori_tokohs,id',
         ]);
 
-        if (Gate::allows('Admin') || $testimoni->user_id == Auth::id()) {
-            $testimoni->update($request->all());
-            return redirect()->route('testimonis.index')
-                ->with('success', 'Testimoni updated successfully.');
-        }
+        // Pastikan hanya Admin atau pemilik testimoni yang bisa melakukan update
 
-        abort(403, 'Unauthorized action.');
+        $testimoni->update($request->all());
+        return redirect()->route('testimonis.index')
+            ->with('success', 'Testimoni updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Testimoni $testimoni)
     {
-        if (Gate::allows('Admin') || $testimoni->user_id == Auth::id()) {
-            $testimoni->delete();
-            return redirect()->route('testimonis.index')
-                ->with('success', 'Testimoni deleted successfully.');
-        }
-
-        abort(403, 'Unauthorized action.');
+        $testimoni->delete();
+        return redirect()->route('testimonis.index')
+            ->with('success', 'Testimoni deleted successfully.');
     }
+
+
+
 
     /**
      * Display the specified resource.
